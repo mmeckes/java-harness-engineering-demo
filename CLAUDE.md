@@ -45,19 +45,12 @@ The client module does not depend on anything. Please respect these dependencies
 
 ## Code style
 
-- IMPORTANT: ALWAYS use 2 spaces for indentation, NEVER tabs.
-- Lines must be at most 100 characters long.
-- Imports must be ordered: static imports first, then all other imports in ASCII order.
-- No wildcard imports.
-- Opening braces go on the same line.
 - Use `final` for fields where possible.
 - Write clean, maintainable code and follow SOLID principles.
-- Follow the Google Java Style Guide.
 - Use meaningful variable names.
 - Don't write long methods.
 - Prefer records for immutable data.
 - Use Optional instead of returning null.
-- YOU MUST ALWAYS run the formatter after editing a Java file!!! This is VERY IMPORTANT.
 - Never use `double` or `float` for money, always use BigDecimal.
 - Always round money with HALF_EVEN to 2 decimal places.
 
