@@ -1,0 +1,19 @@
+{
+  "strictKnownMarketplaces": [
+    { "source": "github", "repo": "anthropics/claude-plugins-official" },
+    { "source": "github", "repo": "mmeckes/java-harness-engineering-demo" },
+    { "source": "directory", "path": "/opt/harness-marketplace" },
+    { "source": "skills-dir" }
+  ],
+  "extraKnownMarketplaces": {
+    "mmeckes-harness-demo": {
+      "source": { "source": "directory", "path": "/opt/harness-marketplace" },
+      "autoUpdate": false
+    }
+  },
+  "enabledPlugins": {
+    "java-harness@mmeckes-harness-demo": true
+  },
+  "disableSideloadFlags": true,
+  "pluginTrustMessage": "Only the platform team's reviewed marketplace is allowed. Ask in #dev-platform to add a plugin."
+}

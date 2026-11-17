@@ -1,0 +1,41 @@
+# Behavioural test of the team harness: runs the eval suite with and without the plugin and
+# uploads the report. Manual, because every run costs model calls (about $1 for this suite).
+# Same setup as claude-review: CLAUDE_REVIEW_ENABLED=true and the AWS_ROLE_TO_ASSUME secret.
+name: plugin-eval
+on:
+  workflow_dispatch:
+permissions:
+  contents: read
+  id-token: write
+jobs:
+  eval:
+    if: vars.CLAUDE_REVIEW_ENABLED == 'true'
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v6
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: "21"
+      - name: Configure AWS credentials (OIDC)
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          role-to-assume: ${{ secrets.AWS_ROLE_TO_ASSUME }}
+          aws-region: ${{ vars.AWS_REGION || 'eu-central-1' }}
+      - name: Install Claude Code
+        run: npm install -g @anthropic-ai/claude-code@latest
+      - name: Run evals
+        working-directory: plugins/java-harness
+        env:
+          CLAUDE_CODE_USE_BEDROCK: "1"
+        run: |
+          claude plugin eval . --scaffold --trust-plugin --allow-tools Edit Write \
+            --json results.json --threshold 0.8 --no-publish --max-cost-usd 5
+      - if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: eval-results
+          path: |
+            plugins/java-harness/results.json
+            plugins/java-harness/evals/results/
