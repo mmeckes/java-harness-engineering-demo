@@ -1,0 +1,5 @@
+schema_version: "1.1"
+name: log-a-mistake
+description: A correction should become a logged mistake with a fix level and a scope, not just an apology.
+context:
+  scaffold_script: fixture.sh
