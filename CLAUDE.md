@@ -2,6 +2,11 @@
 
 IMPORTANT: READ THIS ENTIRE FILE BEFORE DOING ANYTHING. These rules are MANDATORY.
 
+## Commands
+
+- Fast check: ./scripts/fast-check.sh
+- One test: ./mvnw -q -pl <module> test -Dtest=<Class>#<method>
+
 ## Overview
 
 This is the Order Service, a Spring Boot microservice that handles customer orders. It receives
@@ -66,13 +71,11 @@ The client module does not depend on anything. Please respect these dependencies
 
 - Test your changes.
 - Always write tests first (TDD).
-- Run `mvn clean install` to build and test everything.
 - Make sure all tests pass before you finish.
 - Don't add tests unless they are needed.
 - Use AssertJ, not JUnit assertions.
 - Tests for the controller use MockMvc.
 - Never change a test to make it pass.
-- If the build is slow you can use -DskipTests for a quick check.
 
 ## Pricing rules
 
@@ -104,8 +107,8 @@ The client module does not depend on anything. Please respect these dependencies
 ## Release process
 
 1. Make sure you are on main and the tree is clean.
-2. Run the full build with `mvn clean install`.
-3. Run `mvn versions:set -DnewVersion=<version>` to set the version.
+2. Run the full build with `./mvnw -q verify`.
+3. Run `./mvnw versions:set -DnewVersion=<version>` to set the version.
 4. Remove the backup POM files that versions:set creates.
 5. Update CHANGELOG.md with a new section for the version.
 6. List all commits since the last tag in the changelog.
