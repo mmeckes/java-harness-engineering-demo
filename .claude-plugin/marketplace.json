@@ -1,0 +1,13 @@
+{
+  "name": "mmeckes-harness-demo",
+  "description": "A reviewed team harness for Java/Maven repos, from the harness engineering talk",
+  "owner": { "name": "Matthew Meckes" },
+  "plugins": [
+    {
+      "name": "java-harness",
+      "source": "./plugins/java-harness",
+      "description": "Build-command guard, protected paths, format-on-edit, a Stop gate on red builds, a clean-context reviewer, and a mistake-log skill",
+      "category": "harness"
+    }
+  ]
+}

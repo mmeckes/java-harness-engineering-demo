@@ -18,49 +18,15 @@
       "Read(./.env.*)"
     ]
   },
-  "hooks": {
-    "PreToolUse": [
-      {
-        "matcher": "Bash",
-        "hooks": [
-          {
-            "type": "command",
-            "command": "\"$CLAUDE_PROJECT_DIR\"/.claude/hooks/guard-build-cmd.sh"
-          }
-        ]
-      },
-      {
-        "matcher": "Edit|Write",
-        "hooks": [
-          {
-            "type": "command",
-            "command": "\"$CLAUDE_PROJECT_DIR\"/.claude/hooks/protect-files.sh"
-          }
-        ]
+  "extraKnownMarketplaces": {
+    "mmeckes-harness-demo": {
+      "source": {
+        "source": "github",
+        "repo": "mmeckes/java-harness-engineering-demo"
       }
-    ],
-    "PostToolUse": [
-      {
-        "matcher": "Edit|Write",
-        "hooks": [
-          {
-            "type": "command",
-            "command": "\"$CLAUDE_PROJECT_DIR\"/.claude/hooks/format-java.sh"
-          }
-        ]
-      }
-    ],
-    "Stop": [
-      {
-        "hooks": [
-          {
-            "type": "command",
-            "command": "\"$CLAUDE_PROJECT_DIR\"/.claude/hooks/stop-gate.sh",
-            "timeout": 180,
-            "statusMessage": "Stop gate: running fast checks"
-          }
-        ]
-      }
-    ]
+    }
+  },
+  "enabledPlugins": {
+    "java-harness@mmeckes-harness-demo": true
   }
 }
