@@ -81,39 +81,6 @@ The client module does not depend on anything. Please respect these dependencies
 - The free-shipping check uses the subtotal after the promo discount.
 - Unknown promo codes are ignored.
 
-## API rules
-
-- All REST handlers in orders-api must validate request bodies with Bean Validation.
-- Use @Valid on @RequestBody parameters.
-- Don't hand-roll null checks in controllers.
-- Business rules belong in the domain module, not in controllers.
-- Return 400 for malformed input.
-- Return 422 for orders that are well-formed but break a business rule.
-- Return 404 for unknown order ids.
-- Return 201 for created orders.
-- The web layer must only throw ApiException.
-- ApiErrorHandler maps exceptions to responses.
-- Error responses have the shape {"errors": [...]}.
-- Every new endpoint needs an example in docs/api-examples/.
-- Keep the response shape backwards compatible because the mobile app depends on it.
-- Don't add new endpoints without asking.
-- Use constructor injection, never field injection.
-
-## Release process
-
-1. Make sure you are on main and the tree is clean.
-2. Run the full build with `./mvnw -q verify`.
-3. Run `./mvnw versions:set -DnewVersion=<version>` to set the version.
-4. Remove the backup POM files that versions:set creates.
-5. Update CHANGELOG.md with a new section for the version.
-6. List all commits since the last tag in the changelog.
-7. Commit with the message "release: <version>".
-8. Tag the commit with v<version>.
-9. Push the commit.
-10. Push the tag.
-11. Check that the pipeline has started.
-12. Announce the release in the team channel.
-
 ## Git
 
 - Write good commit messages.
