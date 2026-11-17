@@ -33,6 +33,18 @@
           }
         ]
       }
+    ],
+    "Stop": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "\"$CLAUDE_PROJECT_DIR\"/.claude/hooks/stop-gate.sh",
+            "timeout": 180,
+            "statusMessage": "Stop gate: running fast checks"
+          }
+        ]
+      }
     ]
   }
 }

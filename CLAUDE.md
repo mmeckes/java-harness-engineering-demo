@@ -69,9 +69,7 @@ The client module does not depend on anything. Please respect these dependencies
 
 ## Testing
 
-- Test your changes.
 - Always write tests first (TDD).
-- Make sure all tests pass before you finish.
 - Don't add tests unless they are needed.
 - Use AssertJ, not JUnit assertions.
 - Tests for the controller use MockMvc.
