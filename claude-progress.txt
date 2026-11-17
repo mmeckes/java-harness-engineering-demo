@@ -1,0 +1,16 @@
+# claude-progress.txt: append-only, newest session at the bottom.
+# Each session: what you read, what you did, how you verified it, what's left.
+
+## Session 1 (initializer)
+Read: SPEC.md, README.md, the existing tests.
+Did: wrote feature_list.json (8 features). F-01..F-03 already exist in the code; verified each by
+running ./scripts/smoke-test.sh and the PricingServiceTest/OrderValidatorTest suites, marked them passing.
+Added init.sh (runs the fast check, then the smoke test).
+Left: F-04 onwards. F-04 is the priority: SPEC.md is written and agreed.
+
+## Session 2 (coding)
+Read: feature_list.json (3/8), git log, this file. Ran init.sh: green.
+Did: started F-04. Read SPEC.md edge cases; decided bulk discount goes in PricingService next to
+promoRate(), compared per order (max of bulk vs promo, tie goes to promo).
+Not done: no code committed yet. Ran out of session after design notes.
+Left: F-04 implementation and tests. Watch requirement 6 (round each line before summing).

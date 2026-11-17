@@ -182,3 +182,10 @@ so the hook's value is reliability (it also fires after compaction), not a diffe
 ## License
 
 MIT-0. See [LICENSE](LICENSE). Copy the harness into your own repo; no attribution needed.
+
+## Branch `long-running-demo`
+
+Anthropic's long-running harness pattern on this repo: `feature_list.json` (only `passes` may
+change), an append-only `claude-progress.txt`, and `init.sh`. The java-harness plugin's
+SessionStart hook (`orient.sh`) injects the progress tail, recent commits and the next failing
+feature, so a fresh session starts oriented without being told to read anything.

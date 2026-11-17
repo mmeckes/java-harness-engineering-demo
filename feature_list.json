@@ -1,0 +1,18 @@
+[
+  { "id": "F-01", "category": "pricing", "description": "Promo codes give a percentage off the subtotal",
+    "steps": ["POST an order with promoCode WELCOME10", "Verify discount is 10% of subtotal", "Verify unknown codes are ignored"], "passes": true },
+  { "id": "F-02", "category": "pricing", "description": "Free shipping at or above 50.00 after discounts",
+    "steps": ["POST an order totalling exactly 50.00", "Verify shipping is 0.00", "POST an order discounted below 50.00", "Verify shipping is 4.95"], "passes": true },
+  { "id": "F-03", "category": "validation", "description": "Reject empty orders, duplicate SKUs and out-of-range quantities",
+    "steps": ["POST an empty order, expect 400", "POST duplicate SKUs, expect 422", "POST quantity 0, expect 400"], "passes": true },
+  { "id": "F-04", "category": "pricing", "description": "Bulk discount per SPEC.md (5% at 10-49 units, 10% at 50+, doesn't stack with promo codes)",
+    "steps": ["Implement per SPEC.md requirements 1-7", "Cover every SPEC.md edge case with a test", "Add a docs/api-examples pair for a bulk order", "./scripts/smoke-test.sh passes"], "passes": false },
+  { "id": "F-05", "category": "api", "description": "GET /orders lists orders, newest first, paged 20 at a time",
+    "steps": ["Create 25 orders", "GET /orders returns 20, newest first", "GET /orders?page=1 returns the other 5"], "passes": false },
+  { "id": "F-06", "category": "api", "description": "POST /orders/{id}/cancel cancels an order that hasn't shipped",
+    "steps": ["Create an order", "Cancel it, expect 200 and status CANCELLED", "Cancel again, expect 409"], "passes": false },
+  { "id": "F-07", "category": "api", "description": "Idempotency-Key header makes POST /orders safe to retry",
+    "steps": ["POST with Idempotency-Key k1 twice", "Verify one order is created and both responses match"], "passes": false },
+  { "id": "F-08", "category": "pricing", "description": "Orders can be priced in CHF as well as EUR",
+    "steps": ["POST an order with currency CHF", "Verify every amount is in CHF and rounded to 0.05 (Swiss rounding)"], "passes": false }
+]
