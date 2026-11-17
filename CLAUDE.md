@@ -61,8 +61,6 @@ The client module does not depend on anything. Please respect these dependencies
 
 ## Safety
 
-- NEVER read or edit the .env file. It contains secrets.
-- NEVER EVER edit anything in orders-client/. It is GENERATED. Changes will be overwritten.
 - Don't push to main.
 - Be careful with destructive commands.
 - Don't delete files unless you are sure.
@@ -73,7 +71,6 @@ The client module does not depend on anything. Please respect these dependencies
 - Don't add tests unless they are needed.
 - Use AssertJ, not JUnit assertions.
 - Tests for the controller use MockMvc.
-- Never change a test to make it pass.
 
 ## Pricing rules
 
