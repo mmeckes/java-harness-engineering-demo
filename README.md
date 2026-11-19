@@ -35,7 +35,7 @@ Requirements: JDK 21+, `jq`, `git`, Claude Code 2.1.286 or later (for verify-bef
 | `mvn` instead of `./mvnw`, `clean install`, `-DskipTests` | PreToolUse hook | plugin: `guard-build-cmd.sh` |
 | "All tests pass" without running them | Stop hook | plugin: `stop-gate.sh` → repo: `scripts/fast-check.sh` |
 | Editing generated code, secrets, goldens; weakening tests | PreToolUse hook + deny rules | plugin: `protect-files.sh`; repo: `.claude/settings.json` |
-| Reviewing its own diff and saying "looks good" | Read-only subagent | plugin: `java-harness:reviewer` |
+| Reviewing its own diff and saying "looks good" | Read-only subagent on a smaller model (`model: sonnet`) | plugin: `java-harness:reviewer` |
 | A correction that only becomes another CLAUDE.md line | Skill | plugin: `/java-harness:mistake-log` |
 | Claiming a change works without exercising it | Skill (auto-runs before commit) | repo: `.claude/skills/verify/` → `scripts/smoke-test.sh` |
 | Release steps in the wrong order | Manual-only skill | repo: `.claude/skills/release/` |
@@ -177,6 +177,7 @@ so the hook's value is reliability (it also fires after compaction), not a diffe
 - `docs/agent-mistakes.md` is illustrative: it shows the pattern, not measured data.
 - In a headless `claude -p` run in an untrusted folder, project `permissions.allow` and
   `extraKnownMarketplaces` are ignored, but hooks still run.
+- The reviewer subagent runs on `sonnet`, a smaller model than the Opus default, since checking a diff against a spec doesn't need the main session's model. Change `model:` in `plugins/java-harness/agents/reviewer.md` (`haiku`, `opus`, `inherit` or a full model ID). On Amazon Bedrock the `sonnet` alias follows `ANTHROPIC_DEFAULT_SONNET_MODEL` when you've pinned it, and Claude Code's built-in default otherwise.
 - The API listens on `127.0.0.1` by default. Set `SERVER_ADDRESS` to change it deliberately.
 
 ## License

@@ -1,7 +1,7 @@
 {
   "name": "java-harness",
   "displayName": "Java Harness",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "Team harness for Java/Maven repos: guards, protected paths, format-on-edit, a Stop gate on red builds, a clean-context reviewer, and a mistake-log skill",
   "author": { "name": "Matthew Meckes" },
   "repository": "https://github.com/mmeckes/java-harness-engineering-demo",
